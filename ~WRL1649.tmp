@@ -19,21 +19,13 @@ Docs](https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/
 
 Main Steps:
 
-1.  Create 2 service princiapls (one for Read & One for write access)
+1.  Create ADLS Gen2 Data lake
 
-2.  Create ADLS Gen2 Data lake
+2.  Create Event Hub Namespace & Event Hub
 
-3.  Create Event Hub Namespace & Event Hub
+3.  Create .NET application to send events to event hub
 
-4.  Create .NET application to send events to event hub
-
-5.  Create ADLS Gen2 Instance – In portal select storage account
-
-6.  Create Azure Databricks Workspace
-
-7.  Create SQL Server DB
-
-Create ADLS Gen2 Data Data
+4.  Create ADLS Gen2 Instance – In portal select storage account
 
 ![](media/c7c979f0eeb18746462724cb1d5bb433.png)
 
@@ -45,22 +37,6 @@ On advanced tab – select the hierarchal name space.
 
 Note: [Soft delete for blobs - Azure Storage \| Microsoft
 Docs](https://docs.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-overview)
-
-Create SQL Server DB
-====================
-
-![](media/cc0e7814020b5508910058ecc468fb53.png)
-
-Be sure to set firewall on the server to allow for connections from other Azure
-Services
-
-![](media/3294411a853a305d848121a8359098de.png)
-
-Create Table in SQL Database
-
-![](media/a22fdd4e9df7424347a771c1758731bd.png)
-
-**Create Event Hub**
 
 1.  Create Event Hub Instance setup as streaming source
 
@@ -137,6 +113,4 @@ Install on a single node cluster.
 
 leverage open source project on github
 
-<https://github.com/Azure/azure-event-hubs-spark/blob/master/README.md>
-
-![](media/1ac4482a610d64147031079358fb054f.png)
+https://github.com/Azure/azure-event-hubs-spark/blob/master/README.md

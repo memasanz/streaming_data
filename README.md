@@ -6,9 +6,10 @@ IoT Streaming Use Case
 Objective of this hackathon is to gain a better understanding of how to leverage a modern data lake architecture leverage with Structured Streaming to enable IoT Use cases.  
 
 - ADLS Gen2
-- Databricks 
-- Delta Lake Technology
-with Spark Streaming
+- Databricks (Delta Lake Technology with Spark Streaming)
+- Event Hubs
+- Azure Key Vault
+- Create a SQL Database
 
 # Prereqs
 
@@ -86,35 +87,84 @@ RBACs are essentially scoped to top-level resources – either storage accounts 
 | **Limits** |	2000 RBACs in a subscription |	32 ACLs (effectively 28 ACLs) per file, 32 ACLs (effectively 28 ACLs) per folder, default and access ACLs each |
 | **Supported levels of permission** |	[Built-in RBACs](https://docs.microsoft.com/en-us/azure/storage/common/storage-auth-aad-rbac-portal#rbac-roles-for-blobs-and-queues) or [custom RBACs](https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles) | [ACL permissions](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-access-control#levels-of-permission) |
 
+[ADLS Gen 2ACLS](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-access-control#types-of-access-control-lists)
+
+### Work to be done for POC
+
+- Create 2 containers (raw, processed)
+- Provide **Storage Blob Data Reader** to the read service principal.
+
+- Provide ACL Permission to write service principal
+
+
+
+![](media/001_DataLakePerm.PNG)
+
+You can give both the writer access to this location in the data lake
+![](media/002_DataLakePerm.PNG)
+Note it does not have write access or even execute to another folder in the data lake.  That is a good thing.
+
+![](media/003_DataLakePerm.PNG)
+
 
 ## Databricks
 
+Azure Databricks Workspace is an analytics platform based on Apache Spark. Azure Databricks Workspace is integrated with Azure to provide one-click setup, streamlined workflows, and an interactive workspace that enables collaboration between data engineers, data scientists, and machine learning engineers.
+
+| Cluster Mode| Cluster Mode Description|
+| :---------| :----------------------------------------------|
+| Standard | A standard cluster is meant to be used by 1 user|
+|High Concurrency| Shared for multiple users |
+| Single Node| A Single Node cluster is a cluster consisting of a Spark driver and no Spark workers (in public preview) |
+
+| Options|Description|
+| :---------| :---------------------------------------------------------------|
+| Enable Auto-scalling | Good if uncertain how many clusters you wil need, or great varability in your job|
+| Auto shutdown | Makes sense to use|
+| Worker Type | Select based on the work load. |
+|Drive Type| Select based on the work load, if bringing a lot of data back to the head node, then give the driver more resources|
+
+### Whats a pool ? Pools
+Speeds up cluster creation using existing available Azure vms
 
 
+<https://docs.microsoft.com/en-us/azure/databricks/clusters/instance-pools/>
 
+
+| Options|Description|
+| :---------| :---------------------------------------------------------------|
+| Enable Auto-scalling | Good if uncertain how many clusters you wil need, or great varability in your job|
+| Auto shutdown | Makes sense to use|
+| Worker Type | Select based on the work load. |
+|Drive Type| Select based on the work load, if bringing a lot of data back to the head node, then give the driver more resources|
+
+
+### Create an Azure Key Vault-backed secret scope using the UI
+
+https://docs.microsoft.com/en-us/azure/databricks/security/secrets/secret-scopes
+
+Go to: 
+
+```
+https://<databricks-instance>#secrets/createScope
+```
+![](media/002_KV.PNG)
+
+Enter DNS Name & Resource ID
+
+![](media/003_KV.PNG)
+
+###  Let's dig into the notebook
+
+In the notebooks for this repo (
+
+
+## Required Package for Streaming:
+[https://github.com/Azure/azure-event-hubs-spark/blob/master/docs/PySpark/structured-streaming-pyspark.md](https://github.com/Azure/azure-event-hubs-spark/blob/master/docs/PySpark/structured-streaming-pyspark.md)
 
 ### Resources
-[ADLS Gen 2ACLS](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-access-control#types-of-access-control-lists)
-
-# Stitching Together
 
 
-#Reference Documents:
-
-
-# Spark Streaming
-
-## Understanding Windows
-
-Since data is processed in real-time & on a continous basis, event timestamps are important.
-Types include:
-- Event Time - in payload.  Actually occurred.  Dependent on local clock.
-- Ingestion Time - Time ingested into Event Hub.  More reliable.
-- Processsing Time - Processing time.
-
-Scenerios to consider:
-In accurate Event Time
-Out-of-order/Late Events
 
 
 
@@ -135,23 +185,12 @@ Docs](https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/
 [azure-event-hubs-spark/README.md at master · Azure/azure-event-hubs-spark
 (github.com)](https://github.com/Azure/azure-event-hubs-spark/blob/master/README.md)
 
-Main Steps:
 
-1.  Create 2 service princiapls (one for Read & One for write access)
 
-2.  Create ADLS Gen2 Data lake
 
-3.  Create Event Hub Namespace & Event Hub
+## Backup Screen shots
 
-4.  Create .NET application to send events to event hub
-
-5.  Create ADLS Gen2 Instance – In portal select storage account
-
-6.  Create Azure Databricks Workspace
-
-7.  Create SQL Server DB
-
-Create ADLS Gen2 Data Data
+### Create ADLS Gen2 Data Data
 
 ![](media/c7c979f0eeb18746462724cb1d5bb433.png)
 
@@ -164,8 +203,8 @@ On advanced tab – select the hierarchal name space.
 Note: [Soft delete for blobs - Azure Storage \| Microsoft
 Docs](https://docs.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-overview)
 
-Create SQL Server DB
-====================
+### Create SQL Server DB
+
 
 ![](media/cc0e7814020b5508910058ecc468fb53.png)
 
@@ -178,7 +217,7 @@ Create Table in SQL Database
 
 ![](media/a22fdd4e9df7424347a771c1758731bd.png)
 
-**Create Event Hub**
+### Create Event Hub
 
 1.  Create Event Hub Instance setup as streaming source
 
@@ -202,37 +241,38 @@ Create Table in SQL Database
 
 ![](media/5f3f4806f80dbc26482dda5305e1f141.png)
 
-\-Create Event Hub
+2. Create Event Hub
 
 ![](media/6243aef93fe65643f32ab9db624b3ba9.png)
 
-Select ADLS Gen 2 - & Create a new Storage Container.
+3. Select ADLS Gen 2 - & Create a new Storage Container.
 
 ![](media/602cf99249c084f3aeb224870bdfcb5a.png)
 
 ![](media/d8a3fbbab581f4b4ba1a6c09f231e597.png)
 
-Hit the select button.
+4. Hit the select button.
 
 ![](media/5288000e590476a6ef823fa45d7c22f0.png)
 
 ![](media/74bf051215ad3a52bea902afa5bc40eb.png)
 
-Get Connection String
+5. Get Connection String
 
 ![](media/2fc0e5041068364142e6d5cff8dbd594.png)
 
 ![](media/1361ea58518a30cec3e3bd5278d72715.png)
 
-Grab Connection String, we will use it late.
+6. Grab Connection String, we will use it late.
 
 ![](media/de858e7f883c66c58fde115df38126b6.png)
 
-Create a Read/Write
+7. Create a Read/Write
 
 1.  Create .NET application to send telemetry data to Azure Event Hub
 
-If Configuring Databricks to consume event:
+### Databricks Configuration
+ Configuring Databricks to consume event:
 
 Create a Databricks Workspace
 
@@ -249,9 +289,13 @@ Go to link of maven central
 
 Install on a single node cluster.
 
+```
+com.microsoft.azure:azure-eventhubs-spark_2.12:2.3.18
+```
+
 ![](media/90578036175b2be763d5e198a4c9aa3c.png)
 
-\-Configure Event Hubs Spark Connnector (Databricks or Synapse)
+-Configure Event Hubs Spark Connnector (Databricks or Synapse)
 
 leverage open source project on github
 
@@ -260,5 +304,5 @@ leverage open source project on github
 ![](media/1ac4482a610d64147031079358fb054f.png)
 
 
-Producttionalization
+Productionalization
 https://www.brighttalk.com/clients/js/common/1.8.0/app.html?domain=https://www.brighttalk.com/&dataDomain=https://www.brighttalk.com/&secureDomain=https://www.brighttalk.com/&player=webcast_player_widescreen&appName=webcast_player&playerName=html&channelId=12891&communicationId=202715&width=656&height=507&autoStart=false&embedUrl=https://pages.databricks.com/&messagingWindow=https://www.brighttalk.com/clients/js/embed/embed_frame.html?channelid=12891&communicationid=202715&player=webcast_player_widescreen&theme=generic.swf&width=656&height=507&css=generic.swf&categories=undefined&uniqueEmbedId=188474357&iframeId=bt-webcast-player_widescreen-1&nextWebcast=undefined&prevWebcast=undefined

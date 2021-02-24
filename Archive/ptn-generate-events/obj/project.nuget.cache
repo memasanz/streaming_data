@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4OHPRMy2z2AXrkrweJRwWhy4Hksjiy5nEK6GXpKyX9lN4PY9LmV66UPpdTw2sqHFkbi5oqZU2A38pF0zzQSvsw==",
+  "dgSpecHash": "DKMSPdLDO3i6gWuzv/rUjFIlnyGCbeYKy2Wgq/FySpm0zR94vCrOWhKbp+uFnf7jK2PPN2Nob2MYbqQYSk9t2Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\memasanz\\source\\repos\\ptn-generate-events\\ptn-generate-events\\ptn-generate-events.csproj",
+  "projectFilePath": "C:\\Users\\memasanz\\source\\repos\\patterson\\streaming_data\\ptn-generate-events\\ptn-generate-events.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\memasanz\\.nuget\\packages\\microsoft.azure.amqp\\2.4.6\\microsoft.azure.amqp.2.4.6.nupkg.sha512",
     "C:\\Users\\memasanz\\.nuget\\packages\\microsoft.azure.eventhubs\\4.3.1\\microsoft.azure.eventhubs.4.3.1.nupkg.sha512",

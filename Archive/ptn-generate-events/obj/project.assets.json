@@ -6702,11 +6702,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\memasanz\\source\\repos\\ptn-generate-events\\ptn-generate-events\\ptn-generate-events.csproj",
+      "projectUniqueName": "C:\\Users\\memasanz\\source\\repos\\patterson\\streaming_data\\ptn-generate-events\\ptn-generate-events.csproj",
       "projectName": "ptn-generate-events",
-      "projectPath": "C:\\Users\\memasanz\\source\\repos\\ptn-generate-events\\ptn-generate-events\\ptn-generate-events.csproj",
+      "projectPath": "C:\\Users\\memasanz\\source\\repos\\patterson\\streaming_data\\ptn-generate-events\\ptn-generate-events.csproj",
       "packagesPath": "C:\\Users\\memasanz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\memasanz\\source\\repos\\ptn-generate-events\\ptn-generate-events\\obj\\",
+      "outputPath": "C:\\Users\\memasanz\\source\\repos\\patterson\\streaming_data\\ptn-generate-events\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\memasanz\\AppData\\Roaming\\NuGet\\NuGet.Config",

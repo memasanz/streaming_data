@@ -113,6 +113,29 @@ Note it does not have write access or even execute to another folder in the data
 
 ![](media/003_DataLakePerm.PNG)
 
+## Azure SQL DB
+
+https://docs.microsoft.com/en-us/azure/azure-sql/database/features-comparison
+
+Azure SQL Database and SQL Managed Instance share a common code base with the latest stable version of SQL Server. Most of the standard SQL language, query processing, and database management features are identical. The features that are common between SQL Server and SQL Database or SQL Managed Instance are:
+
+- Language features - Control of flow language keywords, Cursors, Data types, DML statements, Predicates, Sequence numbers, Stored procedures, and Variables.
+- Database features - Automatic tuning (plan forcing), Change tracking, Database collation, Contained databases, Contained users, Data compression, Database configuration settings, Online index operations, Partitioning, and Temporal tables (see getting started guide).
+- Security features - Application roles, Dynamic data masking (see getting started guide), Row Level Security, and Threat detection - see getting started guides for SQL Database and SQL Managed Instance.
+- Multi-model capabilities - Graph processing, JSON data (see getting started guide), OPENXML, Spatial, OPENJSON, and XML indexes.
+
+## Azure Event Hub
+
+https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-features
+
+The allowed retention time is up to 7 days for Event Hubs Standard 
+
+https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-capture-overview
+
+*Note* we could go a slightly different path and leverage teh event capture to manage populating a SQL Database
+https://docs.microsoft.com/en-us/azure/event-hubs/store-captured-data-data-warehouse
+
+
 
 ## Databricks
 
@@ -169,6 +192,22 @@ Enter DNS Name & Resource ID
 
 ![](media/003_KV.PNG)
 
+### Why is delta cool
+
+ACID Transactions - Data lakes typically have many pipelines reading/writing data concurrently. 
+
+Time Travel - data versioning to access and revert to an earlier version of data for audits, roolbacks, or to reproduce expereiments
+
+Streaming & Batch Unification - A table in delta is a batch table as well as a streaming source & sink
+
+Schema enforement - automatically handle schema variations to prevent bad records
+
+Schema evoluion - changes to a table schema that can be applied automatically
+
+### What is Spark Streaming
+
+![](media/01_SparkStreaming.PNG)
+
 ###  Let's dig into the notebook
 
 In the notebooks for this repo 
@@ -179,12 +218,15 @@ In the notebooks for this repo
 
 ### Resources
 
+[Spark 3.0 Steaming UI](https://databricks.com/blog/2020/07/29/a-look-at-the-new-structured-streaming-ui-in-apache-spark-3-0.html#)
+
+[Structed Steaming in Production](https://docs.databricks.com/spark/latest/structured-streaming/production.html)
+
+[Streaming Notebook Example](https://docs.databricks.com/_static/notebooks/structured-streaming-python.html)
 
 
 
-
-
-https://docs.databricks.com/_static/notebooks/structured-streaming-python.html
+### Considerations for Future Scaling 
 
 [Tutorial: Migrate event data to Azure Synapse Analytics - Azure Event Hubs \|
 Microsoft
@@ -196,10 +238,6 @@ Docs](https://docs.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spar
 
 [Azure Synapse Analytics - Azure Databricks - Workspace \| Microsoft
 Docs](https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/synapse-analytics#usage-streaming)
-
-[azure-event-hubs-spark/README.md at master · Azure/azure-event-hubs-spark
-(github.com)](https://github.com/Azure/azure-event-hubs-spark/blob/master/README.md)
-
 
 
 
@@ -319,5 +357,4 @@ leverage open source project on github
 ![](media/1ac4482a610d64147031079358fb054f.png)
 
 
-Productionalization
-https://www.brighttalk.com/clients/js/common/1.8.0/app.html?domain=https://www.brighttalk.com/&dataDomain=https://www.brighttalk.com/&secureDomain=https://www.brighttalk.com/&player=webcast_player_widescreen&appName=webcast_player&playerName=html&channelId=12891&communicationId=202715&width=656&height=507&autoStart=false&embedUrl=https://pages.databricks.com/&messagingWindow=https://www.brighttalk.com/clients/js/embed/embed_frame.html?channelid=12891&communicationid=202715&player=webcast_player_widescreen&theme=generic.swf&width=656&height=507&css=generic.swf&categories=undefined&uniqueEmbedId=188474357&iframeId=bt-webcast-player_widescreen-1&nextWebcast=undefined&prevWebcast=undefined
+

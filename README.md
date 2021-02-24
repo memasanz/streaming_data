@@ -22,7 +22,7 @@ Key Components to investigate during the hackathon include:
 
 - Azure Subscription
 - Service Principal for mounting to the datalake (ideally 2)
-- Storage Explorer
+- [Storage Explorer](https://azure.microsoft.com/en-us/features/storage-explorer/)
 - Visual Studio or VS Code
 
 # Creating Resources Components & Resource Considerations

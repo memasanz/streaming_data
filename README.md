@@ -124,6 +124,10 @@ Azure SQL Database and SQL Managed Instance share a common code base with the la
 - Security features - Application roles, Dynamic data masking (see getting started guide), Row Level Security, and Threat detection - see getting started guides for SQL Database and SQL Managed Instance.
 - Multi-model capabilities - Graph processing, JSON data (see getting started guide), OPENXML, Spatial, OPENJSON, and XML indexes.
 
+### Work to be done for POC
+
+- Create Azure SQL DB (can go down to lower core usage due to POC)
+
 ## Azure Event Hub
 
 https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-features
@@ -135,7 +139,9 @@ https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-capture-overview
 *Note* we could go a slightly different path and leverage teh event capture to manage populating a SQL Database
 https://docs.microsoft.com/en-us/azure/event-hubs/store-captured-data-data-warehouse
 
+### Work to be done for POC
 
+- Create An Event Hub Name Space
 
 ## Databricks
 
@@ -209,6 +215,9 @@ Schema evoluion - changes to a table schema that can be applied automatically
 ![](media/01_SparkStreaming.PNG)
 
 ###  Let's dig into the notebook
+
+*.DBC* is a databricks Archive folder we will import into our Databricks Workspace
+
 
 In the notebooks for this repo 
 
@@ -356,5 +365,6 @@ leverage open source project on github
 
 ![](media/1ac4482a610d64147031079358fb054f.png)
 
-
+-A nice tutorial
+<https://docs.microsoft.com/en-us/azure/databricks/scenarios/databricks-stream-from-eventhubs>
 

@@ -9,6 +9,9 @@ Objective of this hackathon is to gain a better understanding of how to leverage
 
 ![](media/ModernDataArchitecture001.PNG)
 
+
+Key Components to investigate during the hackathon include:
+
 - ADLS Gen2
 - Databricks (Delta Lake Technology with Spark Streaming)
 - Event Hubs

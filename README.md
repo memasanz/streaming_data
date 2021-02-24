@@ -98,6 +98,22 @@ RBACs are essentially scoped to top-level resources – either storage accounts 
 
 ### Work to be done for POC
 
+- Create Storage Account type StorageV2
+
+https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview
+
+-Learn about Redundancy
+
+Azure Storage always stores multiple copies of your data so that it is protected from planned and unplanned events, including transient hardware failures, network or power outages, and massive natural disasters. Redundancy ensures that your storage account meets its availability and durability targets even in the face of failures.
+
+- Locally redundant storage (LRS) copies your data synchronously three times within a single physical location in the primary region. LRS is the least expensive replication option, but is not recommended for applications requiring high availability.
+
+- Zone-redundant storage (ZRS) copies your data synchronously across three Azure availability zones in the primary region. For applications requiring high availability, Microsoft recommends using ZRS in the primary region, and also replicating to a secondary region.
+
+
+https://docs.microsoft.com/en-us/azure/storage/common/storage-redundancy
+
+
 - Create 2 containers (raw, processed)
 - Provide **Storage Blob Data Reader** to the read service principal.
 
@@ -112,6 +128,9 @@ You can give both the writer access to this location in the data lake
 Note it does not have write access or even execute to another folder in the data lake.  That is a good thing.
 
 ![](media/003_DataLakePerm.PNG)
+
+
+
 
 ## Azure SQL DB
 

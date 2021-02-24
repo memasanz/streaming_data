@@ -5,6 +5,10 @@ IoT Streaming Use Case
 
 Objective of this hackathon is to gain a better understanding of how to leverage a modern data lake architecture leverage with Structured Streaming to enable IoT Use cases.  
 
+![](media/ModernDataArchitecture.PNG)
+
+![](media/ModernDataArchitecture001.PNG)
+
 - ADLS Gen2
 - Databricks (Delta Lake Technology with Spark Streaming)
 - Event Hubs
@@ -138,6 +142,14 @@ Speeds up cluster creation using existing available Azure vms
 | Worker Type | Select based on the work load. |
 |Drive Type| Select based on the work load, if bringing a lot of data back to the head node, then give the driver more resources|
 
+### Adding Users
+
+https://docs.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/users
+
+Use the User Tab to: 
+- Add and remove users.
+- Grant and revoke the ability to create clusters (if cluster access control has been enabled for the workspace).
+- Grant and revoke membership in the admins group.
 
 ### Create an Azure Key Vault-backed secret scope using the UI
 
@@ -156,7 +168,7 @@ Enter DNS Name & Resource ID
 
 ###  Let's dig into the notebook
 
-In the notebooks for this repo (
+In the notebooks for this repo 
 
 
 ## Required Package for Streaming:
